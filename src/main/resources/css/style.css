@@ -1,0 +1,29 @@
+/* The main table box */
+.table-view {
+    -fx-background-color: white; /* Crisp white background so it pops! */
+    -fx-border-color: #6a5acd; /* Purple border */
+    -fx-border-width: 2px;
+}
+
+/* Force the header bar to be purple */
+.table-view .column-header-background {
+    -fx-background-color: #6a5acd;
+}
+
+/* Force the individual column headers to be purple too */
+.table-view .column-header {
+    -fx-background-color: #6a5acd;
+}
+
+/* The text inside the headers */
+.table-view .column-header .label {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+/* Make the "No content in table" text readable */
+.table-view .placeholder .label {
+    -fx-text-fill: #333333;
+    -fx-font-size: 14px;
+}
