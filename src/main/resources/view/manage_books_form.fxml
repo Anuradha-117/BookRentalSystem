@@ -43,7 +43,7 @@
       </JFXButton>
       <TableView fx:id="tblBooks" layoutX="30.0" layoutY="323.0" prefHeight="258.0" prefWidth="739.0" stylesheets="@../css/style.css">
         <columns>
-          <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="colID" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colTitle" prefWidth="182.4000244140625" text="Title" />
             <TableColumn fx:id="colAuthor" prefWidth="199.199951171875" text="Author" />
             <TableColumn fx:id="colCategory" prefWidth="189.60003662109375" text="Category" />
@@ -60,6 +60,6 @@
             <Font name="Century Gothic Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TextField layoutX="361.0" layoutY="284.0" prefHeight="26.0" prefWidth="407.0" promptText="Search Book by Title or ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
+      <TextField fx:id="txtSearch" layoutX="361.0" layoutY="284.0" prefHeight="26.0" prefWidth="407.0" promptText="Search Book by Title or ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
    </children>
 </AnchorPane>
