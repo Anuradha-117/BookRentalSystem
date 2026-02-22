@@ -6,26 +6,29 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
+import java.net.URL;
 
 public class DashboardController {
 
     @FXML
+    private AnchorPane contentArea;
+
+    @FXML
     void btnManageBooksOnAction(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/manage_books_form.fxml"));
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
+        loadUI("/view/manage_books_form.fxml");
     }
 
     @FXML
-    void btnCustomersOnAction(ActionEvent event) {
+    void btnCustomersOnAction(ActionEvent event) throws IOException {
         System.out.println("Customers");
     }
 
     @FXML
-    void btnRentalsOnAction(ActionEvent event) {
+    void btnRentalsOnAction(ActionEvent event) throws IOException {
         System.out.println("Rentals");
     }
 
@@ -35,5 +38,26 @@ public class DashboardController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    private void loadUI(String fxmlPath) throws IOException {
+        contentArea.getChildren().clear();
+        URL resource = getClass().getResource(fxmlPath);
+        if (resource == null) {
+            System.out.println("Error: FXML file not found at " + fxmlPath);
+            return;
+        }
+
+        Parent load = FXMLLoader.load(resource);
+        contentArea.getChildren().add(load);
+    }
+
+    @FXML
+    public void initialize() {
+        try {
+            loadUI("/view/manage_books_form.fxml");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
