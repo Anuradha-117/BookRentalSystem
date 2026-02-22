@@ -93,6 +93,11 @@ public class ManageBooksController {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
+        String title = txtTitle.getText();
+        if (isBookExist(title)) {
+            new Alert(Alert.AlertType.WARNING, "This book already exists!").show();
+            return;
+        }
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             String sql = "INSERT INTO books (title, author, category, quantity) VALUES (?,?,?,?)";
@@ -210,6 +215,20 @@ public class ManageBooksController {
 
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+    }
+
+    private boolean isBookExist(String title) {
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement("SELECT id FROM books WHERE title=?");
+            pstm.setString(1, title);
+            ResultSet resultSet = pstm.executeQuery();
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 }
