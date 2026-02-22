@@ -186,12 +186,13 @@ public class ManageBooksController {
         try {
             String search = txtSearch.getText();
             Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR category LIKE ?";
+            String sql = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR category LIKE ? OR CAST(id AS CHAR) LIKE ?";
             PreparedStatement pstm = connection.prepareStatement(sql);
 
             pstm.setString(1, "%" + search + "%");
             pstm.setString(2, "%" + search + "%");
             pstm.setString(3, "%" + search + "%");
+            pstm.setString(4, "%" + search + "%");
 
             ResultSet resultSet = pstm.executeQuery();
 
