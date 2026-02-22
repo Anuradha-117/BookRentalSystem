@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import db.DBConnection;
 import javafx.collections.FXCollections;
@@ -9,7 +10,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.Book;
 
@@ -20,6 +23,10 @@ import java.sql.SQLException;
 
 public class ManageBooksController {
 
+    public JFXButton btnAdd;
+    public JFXButton btnUpdate;
+    public JFXButton btnDelete;
+    public TextField txtSearch;
     @FXML
     private JFXTextField txtTitle;
 
@@ -172,6 +179,36 @@ public class ManageBooksController {
             txtAuthor.setText(book.getAuthor());
             txtCategory.setText(book.getCategory());
             txtQuantity.setText(String.valueOf(book.getQuantity())); // Fixed name
+        }
+    }
+
+    public void txtSearchOnKeyReleased(KeyEvent keyEvent) {
+        try {
+            String search = txtSearch.getText();
+            Connection connection = DBConnection.getInstance().getConnection();
+            String sql = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR category LIKE ?";
+            PreparedStatement pstm = connection.prepareStatement(sql);
+
+            pstm.setString(1, "%" + search + "%");
+            pstm.setString(2, "%" + search + "%");
+            pstm.setString(3, "%" + search + "%");
+
+            ResultSet resultSet = pstm.executeQuery();
+
+            ObservableList<Book> list = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                list.add(new Book(
+                        resultSet.getInt("id"),
+                        resultSet.getString("title"),
+                        resultSet.getString("author"),
+                        resultSet.getString("category"),
+                        resultSet.getInt("quantity")
+                ));
+            }
+            tblBooks.setItems(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }

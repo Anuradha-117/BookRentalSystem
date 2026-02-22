@@ -60,6 +60,6 @@
             <Font name="Century Gothic Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearch" layoutX="361.0" layoutY="284.0" prefHeight="26.0" prefWidth="407.0" promptText="Search Book by Title or ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
+      <TextField fx:id="txtSearch" layoutX="361.0" layoutY="284.0" onKeyReleased="#txtSearchOnKeyReleased" prefHeight="26.0" prefWidth="407.0" promptText="Search Book by Title or ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
    </children>
 </AnchorPane>
