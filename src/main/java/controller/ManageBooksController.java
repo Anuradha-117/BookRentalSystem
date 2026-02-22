@@ -162,4 +162,16 @@ public class ManageBooksController {
         txtQuantity.clear();
         selectedBookId = 0;
     }
+
+    public void handleMouseAction(MouseEvent mouseEvent) {
+        Book book = tblBooks.getSelectionModel().getSelectedItem();
+
+        if (book != null) {
+            selectedBookId = book.getId();
+            txtTitle.setText(book.getTitle());
+            txtAuthor.setText(book.getAuthor());
+            txtCategory.setText(book.getCategory());
+            txtQuantity.setText(String.valueOf(book.getQuantity())); // Fixed name
+        }
+    }
 }
