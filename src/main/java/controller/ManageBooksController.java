@@ -61,6 +61,16 @@ public class ManageBooksController {
     private int selectedBookId = 0;
 
     public void initialize() {
+        txtQuantity.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                txtQuantity.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+        txtCategory.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.matches(".*\\d.*")) {
+                txtCategory.setText(oldValue);
+            }
+        });
         colID.setCellValueFactory(new PropertyValueFactory<>("id"));
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
