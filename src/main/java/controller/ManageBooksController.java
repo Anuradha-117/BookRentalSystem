@@ -159,8 +159,7 @@ public class ManageBooksController {
         }
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "DELETE FROM books WHERE id=?";
-            PreparedStatement pstm = connection.prepareStatement(sql);
+            PreparedStatement pstm = connection.prepareStatement("DELETE FROM books WHERE id=?");
             pstm.setInt(1, selectedBookId);
 
             if (pstm.executeUpdate() > 0) {
@@ -197,8 +196,7 @@ public class ManageBooksController {
         try {
             String search = txtSearch.getText();
             Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR category LIKE ? OR CAST(id AS CHAR) LIKE ?";
-            PreparedStatement pstm = connection.prepareStatement(sql);
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM books WHERE title LIKE ? OR author LIKE ? OR category LIKE ? OR CAST(id AS CHAR) LIKE ?");
 
             pstm.setString(1, "%" + search + "%");
             pstm.setString(2, "%" + search + "%");

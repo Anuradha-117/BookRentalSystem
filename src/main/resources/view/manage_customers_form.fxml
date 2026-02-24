@@ -48,7 +48,7 @@
             <Font name="Century Gothic Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearch" layoutX="455.0" layoutY="287.0" prefHeight="26.0" prefWidth="196.0" promptText="Search Customer by ID or Phone..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
+      <TextField fx:id="txtSearch" layoutX="399.0" layoutY="287.0" onKeyReleased="#txtSearchOnKeyReleased" prefHeight="26.0" prefWidth="252.0" promptText="Search Customer by ID,Name or Phone..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
       <Label layoutX="501.0" layoutY="237.0" prefHeight="18.0" prefWidth="111.0" text="(Select From Table)">
          <font>
             <Font name="Arial Black" size="10.0" />

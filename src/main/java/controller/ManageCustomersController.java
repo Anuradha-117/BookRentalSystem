@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import model.Customer;
 
@@ -187,6 +188,33 @@ public class ManageCustomersController {
             selectedCustomerId = customer.getId();
             txtName.setText(customer.getName());
             txtPhone.setText(customer.getPhone());
+        }
+    }
+
+    public void txtSearchOnKeyReleased(KeyEvent keyEvent) {
+        try {
+            String search = txtSearch.getText();
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement("SELECT * FROM Customers WHERE name LIKE ? OR phone LIKE ? OR CAST(id AS CHAR) LIKE ?");
+
+            pstm.setString(1, "%" + search + "%");
+            pstm.setString(2, "%" + search + "%");
+            pstm.setString(3, "%" + search + "%");
+
+            ResultSet resultSet = pstm.executeQuery();
+
+            ObservableList<Customer> list = FXCollections.observableArrayList();
+            while (resultSet.next()) {
+                list.add(new Customer(
+                        resultSet.getInt("id"),
+                        resultSet.getString("Name"),
+                        resultSet.getString("Phone")
+                ));
+            }
+            tblCustomers.setItems(list);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 }
