@@ -110,8 +110,7 @@ public class ManageBooksController {
         }
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "INSERT INTO books (title, author, category, quantity) VALUES (?,?,?,?)";
-            PreparedStatement pstm = connection.prepareStatement(sql);
+            PreparedStatement pstm = connection.prepareStatement("INSERT INTO books (title, author, category, quantity) VALUES (?,?,?,?)");
             pstm.setString(1, txtTitle.getText());
             pstm.setString(2, txtAuthor.getText());
             pstm.setString(3, txtCategory.getText());
@@ -124,8 +123,6 @@ public class ManageBooksController {
             }
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
-        } catch (NumberFormatException e) {
-            new Alert(Alert.AlertType.ERROR, "Quantity must be a number!").show();
         }
     }
 

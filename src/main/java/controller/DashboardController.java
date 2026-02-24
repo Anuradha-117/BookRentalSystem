@@ -24,7 +24,7 @@ public class DashboardController {
 
     @FXML
     void btnCustomersOnAction(ActionEvent event) throws IOException {
-        System.out.println("Customers");
+        loadUI("/view/manage_customers_form.fxml");
     }
 
     @FXML
