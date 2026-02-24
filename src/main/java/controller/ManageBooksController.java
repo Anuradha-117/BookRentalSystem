@@ -134,8 +134,7 @@ public class ManageBooksController {
         }
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            String sql = "UPDATE books SET title=?, author=?, category=?, quantity=? WHERE id=?";
-            PreparedStatement pstm = connection.prepareStatement(sql);
+            PreparedStatement pstm = connection.prepareStatement("UPDATE books SET title=?, author=?, category=?, quantity=? WHERE id=?");
             pstm.setString(1, txtTitle.getText());
             pstm.setString(2, txtAuthor.getText());
             pstm.setString(3, txtCategory.getText());

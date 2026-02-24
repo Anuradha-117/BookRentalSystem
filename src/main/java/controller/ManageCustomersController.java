@@ -12,6 +12,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import model.Customer;
 
 import java.sql.Connection;
@@ -73,7 +74,24 @@ public class ManageCustomersController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
+        if (selectedCustomerId == 0) {
+            new Alert(Alert.AlertType.WARNING, "Select a Customer to delete!").show();
+            return;
+        }
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            String sql = "DELETE FROM Customers WHERE id=?";
+            PreparedStatement pstm = connection.prepareStatement(sql);
+            pstm.setInt(1, selectedCustomerId);
 
+            if (pstm.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Customer Deleted!").show();
+                loadTable();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -85,11 +103,11 @@ public class ManageCustomersController {
         }
         try {
             Connection connection = DBConnection.getInstance().getConnection();
-            PreparedStatement psTm = connection.prepareStatement("INSERT INTO Customers (name,phone) VALUES (?,?)");
-            psTm.setString(1,txtName.getText());
-            psTm.setString(2,txtPhone.getText());
+            PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customers (name,phone) VALUES (?,?)");
+            pstm.setString(1,txtName.getText());
+            pstm.setString(2,txtPhone.getText());
 
-            if (psTm.executeUpdate()>0) {
+            if (pstm.executeUpdate()>0) {
                 new Alert(Alert.AlertType.INFORMATION, "Customer Added!").show();
                 loadTable();
                 clearFields();
@@ -103,6 +121,25 @@ public class ManageCustomersController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
+        if (selectedCustomerId == 0){
+            new Alert(Alert.AlertType.WARNING,"Select a customer to update!").show();
+            return;
+        }
+        try {
+            Connection connection = DBConnection.getInstance().getConnection();
+            PreparedStatement pstm = connection.prepareStatement("UPDATE Customers SET name = ?,phone = ? WHERE id = ?");
+            pstm.setString(1,txtName.getText());
+            pstm.setString(2,txtPhone.getText());
+            pstm.setInt(3,selectedCustomerId);
+
+            if (pstm.executeUpdate() > 0) {
+                new Alert(Alert.AlertType.INFORMATION, "Customer Updated!").show();
+                loadTable();
+                clearFields();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 
@@ -144,4 +181,12 @@ public class ManageCustomersController {
         txtPhone.clear();
     }
 
+    public void handleMouseAction(MouseEvent mouseEvent) {
+        Customer customer = tblCustomers.getSelectionModel().getSelectedItem();
+        if (customer != null ){
+            selectedCustomerId = customer.getId();
+            txtName.setText(customer.getName());
+            txtPhone.setText(customer.getPhone());
+        }
+    }
 }
