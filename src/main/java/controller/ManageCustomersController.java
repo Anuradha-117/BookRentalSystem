@@ -60,12 +60,19 @@ public class ManageCustomersController {
             if (!newValue.matches("\\d*")) {
                 txtPhone.setText(newValue.replaceAll("[^\\d]", ""));
             }
+
+            if (txtPhone.getText().length() > 10) {
+                String limitedText = txtPhone.getText().substring(0, 10);
+                txtPhone.setText(limitedText);
+            }
         });
+
         txtName.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.matches(".*\\d.*")) {
                 txtName.setText(oldValue);
             }
         });
+
         colId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colName.setCellValueFactory(new PropertyValueFactory<>("name"));
         colPhone.setCellValueFactory(new PropertyValueFactory<>("phone"));
@@ -91,7 +98,7 @@ public class ManageCustomersController {
                 clearFields();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
         }
     }
 
@@ -139,7 +146,7 @@ public class ManageCustomersController {
                 clearFields();
             }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
         }
 
     }
@@ -207,8 +214,8 @@ public class ManageCustomersController {
             while (resultSet.next()) {
                 list.add(new Customer(
                         resultSet.getInt("id"),
-                        resultSet.getString("Name"),
-                        resultSet.getString("Phone")
+                        resultSet.getString("name"),
+                        resultSet.getString("phone")
                 ));
             }
             tblCustomers.setItems(list);

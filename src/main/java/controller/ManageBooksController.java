@@ -147,7 +147,7 @@ public class ManageBooksController {
                 clearFields();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
         }
     }
 
@@ -168,7 +168,7 @@ public class ManageBooksController {
                 clearFields();
             }
         } catch (SQLException e) {
-            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
         }
     }
 
