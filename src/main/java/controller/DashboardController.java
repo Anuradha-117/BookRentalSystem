@@ -29,7 +29,7 @@ public class DashboardController {
 
     @FXML
     void btnRentalsOnAction(ActionEvent event) throws IOException {
-        System.out.println("Rentals");
+        loadUI("/view/rentals_form.fxml");
     }
 
     @FXML
