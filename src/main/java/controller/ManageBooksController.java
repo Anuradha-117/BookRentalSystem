@@ -189,7 +189,7 @@ public class ManageBooksController {
                 clearFields();
             }
         } catch (SQLException e) {
-            new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
+            new Alert(Alert.AlertType.ERROR, "This book has an ongoing rental record").show();
         }
     }
 

@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0AC4E0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RentalsController">
    <children>
       <Label layoutX="242.0" layoutY="14.0" text="Rentals &amp; Returns">
@@ -33,7 +32,7 @@
             <Font name="Bookshelf Symbol 7" size="20.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btnIssue" layoutX="98.0" layoutY="254.0" onAction="#btnIssueOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: #FAB95B;" text="Issue">
+      <JFXButton fx:id="btnIssue" layoutX="100.0" layoutY="239.0" onAction="#btnIssueOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: #FAB95B;" text="Issue">
          <font>
             <Font name="Century Gothic Bold" size="12.0" />
          </font>
@@ -48,17 +47,22 @@
             <TableColumn fx:id="colFine" prefWidth="96.79997558593755" text="Fine" />
          </columns>
       </TableView>
-      <JFXButton fx:id="btnReturn" layoutX="547.0" layoutY="254.0" onAction="#btnReturnOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: #5B23FF;" text="Return">
+      <JFXButton fx:id="btnReturn" layoutX="546.0" layoutY="239.0" onAction="#btnReturnOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: #5B23FF;" text="Return">
          <font>
             <Font name="Century Gothic Bold" size="12.0" />
          </font>
       </JFXButton>
-      <TextField fx:id="txtSearch" layoutX="414.0" layoutY="308.0" prefHeight="26.0" prefWidth="354.0" promptText="Search by Rental, Book, or Customer ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
-      <Separator layoutX="396.0" layoutY="76.0" orientation="VERTICAL" prefHeight="222.0" prefWidth="0.0" />
+      <TextField fx:id="txtSearch" layoutX="30.0" layoutY="308.0" prefHeight="26.0" prefWidth="354.0" promptText="Search by Rental, Book, or Customer ID..." style="-fx-background-color: #ACBAC4; -fx-prompt-text-fill: #555555;" />
+      <Separator layoutX="396.0" layoutY="68.0" orientation="VERTICAL" prefHeight="214.0" prefWidth="3.0" />
       <Label fx:id="lblFine" layoutX="494.0" layoutY="179.0" text="Fine Amount :">
          <font>
             <Font name="Bookshelf Symbol 7" size="20.0" />
          </font>
       </Label>
+      <JFXButton fx:id="btnDelete" layoutX="637.0" layoutY="306.0" onAction="#btnDeleteOnAction" prefHeight="30.0" prefWidth="118.0" style="-fx-background-color: #D02752;" text="Delete Rental">
+         <font>
+            <Font name="Century Gothic Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>
