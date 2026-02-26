@@ -105,15 +105,28 @@ public class ManageCustomersController {
     @FXML
     void btnSaveOnAction(ActionEvent event) {
         String name = txtName.getText();
+        String phone = txtPhone.getText();
+
+        if (name.isEmpty() || phone.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+
+        if (phone.length() < 10) {
+            new Alert(Alert.AlertType.WARNING, "Phone number must be 10 digits!").show();
+            return;
+        }
+
         if (isCustomerExist(name)){
             new Alert(Alert.AlertType.WARNING,"This customer already exists!").show();
             return;
         }
+
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO Customers (name,phone) VALUES (?,?)");
-            pstm.setString(1,txtName.getText());
-            pstm.setString(2,txtPhone.getText());
+            pstm.setString(1, name);
+            pstm.setString(2, phone);
 
             if (pstm.executeUpdate()>0) {
                 new Alert(Alert.AlertType.INFORMATION, "Customer Added!").show();
@@ -124,7 +137,6 @@ public class ManageCustomersController {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error: " + e.getMessage()).show();
         }
-
     }
 
     @FXML
@@ -133,12 +145,26 @@ public class ManageCustomersController {
             new Alert(Alert.AlertType.WARNING,"Select a customer to update!").show();
             return;
         }
+
+        String name = txtName.getText();
+        String phone = txtPhone.getText();
+
+        if (name.isEmpty() || phone.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+
+        if (phone.length() < 10) {
+            new Alert(Alert.AlertType.WARNING, "Phone number must be 10 digits!").show();
+            return;
+        }
+
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("UPDATE Customers SET name = ?,phone = ? WHERE id = ?");
-            pstm.setString(1,txtName.getText());
-            pstm.setString(2,txtPhone.getText());
-            pstm.setInt(3,selectedCustomerId);
+            pstm.setString(1, name);
+            pstm.setString(2, phone);
+            pstm.setInt(3, selectedCustomerId);
 
             if (pstm.executeUpdate() > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "Customer Updated!").show();

@@ -71,7 +71,7 @@ public class ManageBooksController {
                 txtCategory.setText(oldValue);
             }
         });
-        colID.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colID.setCellValueFactory( new PropertyValueFactory<>("id") );
         colTitle.setCellValueFactory(new PropertyValueFactory<>("title"));
         colAuthor.setCellValueFactory(new PropertyValueFactory<>("author"));
         colCategory.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -104,17 +104,27 @@ public class ManageBooksController {
     @FXML
     void btnAddOnAction(ActionEvent event) {
         String title = txtTitle.getText();
+        String author = txtAuthor.getText();
+        String category = txtCategory.getText();
+        String qtyText = txtQuantity.getText();
+
+        if (title.isEmpty() || author.isEmpty() || category.isEmpty() || qtyText.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+
         if (isBookExist(title)) {
             new Alert(Alert.AlertType.WARNING, "This book already exists!").show();
             return;
         }
+
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("INSERT INTO books (title, author, category, quantity) VALUES (?,?,?,?)");
-            pstm.setString(1, txtTitle.getText());
-            pstm.setString(2, txtAuthor.getText());
-            pstm.setString(3, txtCategory.getText());
-            pstm.setInt(4, Integer.parseInt(txtQuantity.getText()));
+            pstm.setString(1, title);
+            pstm.setString(2, author);
+            pstm.setString(3, category);
+            pstm.setInt(4, Integer.parseInt(qtyText));
 
             if (pstm.executeUpdate() > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "Book Added!").show();
@@ -132,13 +142,24 @@ public class ManageBooksController {
             new Alert(Alert.AlertType.WARNING, "Select a book to update!").show();
             return;
         }
+
+        String title = txtTitle.getText();
+        String author = txtAuthor.getText();
+        String category = txtCategory.getText();
+        String qtyText = txtQuantity.getText();
+
+        if (title.isEmpty() || author.isEmpty() || category.isEmpty() || qtyText.isEmpty()) {
+            new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("UPDATE books SET title=?, author=?, category=?, quantity=? WHERE id=?");
-            pstm.setString(1, txtTitle.getText());
-            pstm.setString(2, txtAuthor.getText());
-            pstm.setString(3, txtCategory.getText());
-            pstm.setInt(4, Integer.parseInt(txtQuantity.getText()));
+            pstm.setString(1, title);
+            pstm.setString(2, author);
+            pstm.setString(3, category);
+            pstm.setInt(4, Integer.parseInt(qtyText));
             pstm.setInt(5, selectedBookId);
 
             if (pstm.executeUpdate() > 0) {
