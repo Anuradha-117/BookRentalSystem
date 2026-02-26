@@ -94,9 +94,21 @@ public class ManageUsersController {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        if (selectedUserId == 0) {
+        User selectedUser = tblUsers.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
             new Alert(Alert.AlertType.WARNING, "Select a user to update!").show();
             return;
+        }
+
+        if (!util.UserSession.username.equalsIgnoreCase("admin")
+                && selectedUser.getRole().equalsIgnoreCase("admin")) {
+
+            // Allow admns to only update themselves
+            if (!selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+                new Alert(Alert.AlertType.ERROR, "Only the Main Admin can update other Admins!").show();
+                return;
+            }
         }
 
         String user = txtUsername.getText();
@@ -114,7 +126,7 @@ public class ManageUsersController {
             pstm.setString(1, user);
             pstm.setString(2, pass);
             pstm.setString(3, role);
-            pstm.setInt(4, selectedUserId);
+            pstm.setInt(4, selectedUser.getId());
 
             if (pstm.executeUpdate() > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "User Updated!").show();
@@ -129,21 +141,34 @@ public class ManageUsersController {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        if (selectedUserId == 0) {
+        User selectedUser = tblUsers.getSelectionModel().getSelectedItem();
+
+        if (selectedUser == null) {
             new Alert(Alert.AlertType.WARNING, "Select a user to delete!").show();
             return;
         }
 
-        // did this to prevent deleting the main admin account, which is a must for managing the system.
-        if (txtUsername.getText().equalsIgnoreCase("admin")) {
-            new Alert(Alert.AlertType.ERROR, "You cannot delete the main Admin!").show();
+        if (selectedUser.getUsername().equalsIgnoreCase("admin")) {
+            new Alert(Alert.AlertType.ERROR, "The Main Admin account cannot be deleted!").show();
+            return;
+        }
+
+        if (!util.UserSession.username.equalsIgnoreCase("admin")
+                && selectedUser.getRole().equalsIgnoreCase("admin")) {
+            new Alert(Alert.AlertType.ERROR, "Only the Main Admin can delete other Admins!").show();
+            return;
+        }
+
+
+        if (selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+            new Alert(Alert.AlertType.ERROR, "You cannot delete your own account while logged in!").show();
             return;
         }
 
         try {
             Connection connection = DBConnection.getInstance().getConnection();
             PreparedStatement pstm = connection.prepareStatement("DELETE FROM users WHERE id=?");
-            pstm.setInt(1, selectedUserId);
+            pstm.setInt(1, selectedUser.getId());
 
             if (pstm.executeUpdate() > 0) {
                 new Alert(Alert.AlertType.INFORMATION, "User Deleted!").show();
