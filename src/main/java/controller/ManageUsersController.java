@@ -41,7 +41,7 @@ public class ManageUsersController {
         colPassword.setCellValueFactory(new PropertyValueFactory<>("password"));
         colRole.setCellValueFactory(new PropertyValueFactory<>("role"));
 
-        cmbRole.setItems(FXCollections.observableArrayList("admin", "user"));
+        cmbRole.setItems(FXCollections.observableArrayList("Admin", "Staff"));
 
         loadTable();
 
@@ -64,6 +64,11 @@ public class ManageUsersController {
 
         if (user.isEmpty() || pass.isEmpty() || role == null) {
             new Alert(Alert.AlertType.WARNING, "Please fill all fields!").show();
+            return;
+        }
+
+        if ("Admin".equalsIgnoreCase(role) && !util.UserSession.username.equalsIgnoreCase("admin")) {
+            new Alert(Alert.AlertType.ERROR, "Only the Main Admin can create new Admins!").show();
             return;
         }
 
@@ -101,12 +106,26 @@ public class ManageUsersController {
             return;
         }
 
-        if (!util.UserSession.username.equalsIgnoreCase("admin")
-                && selectedUser.getRole().equalsIgnoreCase("admin")) {
+        if (selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+            if (!cmbRole.getValue().equalsIgnoreCase(selectedUser.getRole())) {
+                new Alert(Alert.AlertType.ERROR, "You cannot change your own role!").show();
+                return;
+            }
+        }
 
-            // Allow admns to only update themselves
+        String newRole = cmbRole.getValue();
+        if (!util.UserSession.username.equalsIgnoreCase("admin")
+                && selectedUser.getRole().equalsIgnoreCase("Admin")) {
+
             if (!selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
                 new Alert(Alert.AlertType.ERROR, "Only the Main Admin can update other Admins!").show();
+                return;
+            }
+        }
+
+        if ("Admin".equalsIgnoreCase(newRole) && !util.UserSession.username.equalsIgnoreCase("admin")) {
+            if (!selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+                new Alert(Alert.AlertType.ERROR, "Only the Main Admin can assign the Admin role!").show();
                 return;
             }
         }
