@@ -2,6 +2,8 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -9,7 +11,7 @@
    <children>
       <AnchorPane prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #685AFF;">
          <children>
-            <JFXButton fx:id="btnManageBooks" focusTraversable="false" layoutX="3.0" layoutY="98.0" onAction="#btnManageBooksOnAction" prefHeight="48.0" prefWidth="182.0" text="Manage Books" textFill="WHITE">
+            <JFXButton fx:id="btnManageBooks" focusTraversable="false" layoutX="10.0" layoutY="191.0" onAction="#btnManageBooksOnAction" prefHeight="48.0" prefWidth="182.0" text="Manage Books" textFill="WHITE">
                <font>
                   <Font name="Century Gothic Bold" size="21.0" />
                </font>
@@ -17,7 +19,7 @@
                   <Glow level="0.16" />
                </effect>
             </JFXButton>
-            <JFXButton fx:id="btnCustomers" focusTraversable="false" layoutX="4.0" layoutY="171.0" onAction="#btnCustomersOnAction" prefHeight="48.0" prefWidth="137.0" text="Customers" textFill="WHITE">
+            <JFXButton fx:id="btnCustomers" focusTraversable="false" layoutX="8.0" layoutY="263.0" onAction="#btnCustomersOnAction" prefHeight="48.0" prefWidth="137.0" text="Customers" textFill="WHITE">
                <font>
                   <Font name="Century Gothic Bold" size="21.0" />
                </font>
@@ -25,7 +27,7 @@
                   <Glow level="0.16" />
                </effect>
             </JFXButton>
-            <JFXButton fx:id="btnRentals" focusTraversable="false" layoutX="7.0" layoutY="245.0" onAction="#btnRentalsOnAction" prefHeight="48.0" prefWidth="103.0" text="Rentals" textFill="WHITE">
+            <JFXButton fx:id="btnRentals" focusTraversable="false" layoutX="10.0" layoutY="331.0" onAction="#btnRentalsOnAction" prefHeight="48.0" prefWidth="103.0" text="Rentals" textFill="WHITE">
                <font>
                   <Font name="Century Gothic Bold" size="21.0" />
                </font>
@@ -36,6 +38,19 @@
             <JFXButton fx:id="btnLogout" layoutX="31.0" layoutY="529.0" onAction="#btnLogoutOnAction" prefHeight="48.0" prefWidth="103.0" style="-fx-background-color: #F68048;" text="Logout" textFill="WHITE">
                <font>
                   <Font name="Century Gothic Bold" size="21.0" />
+               </font>
+               <effect>
+                  <Glow level="0.16" />
+               </effect>
+            </JFXButton>
+            <ImageView fitHeight="174.0" fitWidth="310.0" layoutX="-57.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/Logo.png" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnManageUsers" focusTraversable="false" layoutX="13.0" layoutY="461.0" onAction="#btnManageUsersOnAction" prefHeight="48.0" prefWidth="138.0" text="Manage Users" textFill="WHITE" underline="true" wrapText="true">
+               <font>
+                  <Font name="Century Gothic Bold" size="15.0" />
                </font>
                <effect>
                   <Glow level="0.16" />
