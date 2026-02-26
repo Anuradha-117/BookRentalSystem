@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import util.UserSession;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,6 +40,13 @@ public class LoginController {
 
             if (resultSet.next()) {
                 System.out.println("✅ Login Successful!");
+
+                String role = resultSet.getString("role");
+                UserSession.userRole = role;
+                UserSession.username = username;
+
+                System.out.println("User Role: " + role);
+
                 Parent root = FXMLLoader.load(getClass().getResource("/view/dashboard_form.fxml"));
                 Stage stage = (Stage) txtUsername.getScene().getWindow();
                 stage.setScene(new Scene(root));

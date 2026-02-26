@@ -1,5 +1,6 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,12 +9,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import util.UserSession;
 
 import java.io.IOException;
 import java.net.URL;
 
 public class DashboardController {
 
+    public JFXButton btnManageUsers;
     @FXML
     private AnchorPane contentArea;
 
@@ -59,5 +62,13 @@ public class DashboardController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        if (!"admin".equalsIgnoreCase(UserSession.userRole)) {
+            btnManageUsers.setVisible(false);
+            btnManageUsers.setDisable(true);
+        }
+    }
+
+    public void btnManageUsersOnAction(ActionEvent actionEvent) throws IOException {
+        loadUI("/view/manage_users_form.fxml");
     }
 }
