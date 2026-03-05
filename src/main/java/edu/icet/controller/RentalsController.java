@@ -1,15 +1,15 @@
-package controller;
+package edu.icet.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import db.DBConnection;
+import edu.icet.db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Rental;
+import edu.icet.model.Rental;
 
 import java.sql.*;
 import java.time.LocalDate;

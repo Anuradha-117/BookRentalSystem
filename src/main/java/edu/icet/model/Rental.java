@@ -1,4 +1,4 @@
-package model;
+package edu.icet.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

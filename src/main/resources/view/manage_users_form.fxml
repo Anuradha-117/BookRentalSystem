@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0AC4E0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ManageUsersController">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0AC4E0;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.icet.controller.ManageUsersController">
     <children>
         <Label layoutX="268.0" layoutY="25.0" text="Manage Users">
             <font>
