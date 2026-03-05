@@ -16,7 +16,7 @@ CREATE TABLE books (
     quantity INT NOT NULL
 );
 
-CREATE TABLE customers (
+CREATE TABLE Customers (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     phone VARCHAR(20) NOT NULL UNIQUE

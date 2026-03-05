@@ -126,7 +126,7 @@ public class RentalsController {
                 return;
             }
 
-            PreparedStatement checkCust = connection.prepareStatement("SELECT id FROM customers WHERE id = ?");
+            PreparedStatement checkCust = connection.prepareStatement("SELECT id FROM Customers WHERE id = ?");
             checkCust.setInt(1, custId);
             if (!checkCust.executeQuery().next()) {
                 new Alert(Alert.AlertType.ERROR, "Invalid Customer ID!").show();
