@@ -1,15 +1,15 @@
-package controller;
+package edu.icet.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import db.DBConnection;
+import edu.icet.db.DBConnection;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.Rental;
+import edu.icet.model.Rental;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -126,7 +126,7 @@ public class RentalsController {
                 return;
             }
 
-            PreparedStatement checkCust = connection.prepareStatement("SELECT id FROM customers WHERE id = ?");
+            PreparedStatement checkCust = connection.prepareStatement("SELECT id FROM Customers WHERE id = ?");
             checkCust.setInt(1, custId);
             if (!checkCust.executeQuery().next()) {
                 new Alert(Alert.AlertType.ERROR, "Invalid Customer ID!").show();

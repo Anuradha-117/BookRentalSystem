@@ -1,6 +1,6 @@
-package controller;
+package edu.icet.controller;
 
-import db.DBConnection;
+import edu.icet.db.DBConnection;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,7 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import util.UserSession;
+import edu.icet.util.UserSession;
 
 import java.io.IOException;
 import java.sql.Connection;

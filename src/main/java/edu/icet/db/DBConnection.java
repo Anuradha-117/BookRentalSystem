@@ -1,4 +1,4 @@
-package db;
+package edu.icet.db;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ public class DBConnection {
     private Connection connection;
 
     private DBConnection() throws SQLException {
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/book_rental_db", "root", "2424");
+        connection = DriverManager.getConnection("jdbc:mysql://sql12.freesqldatabase.com:3306/sql12818968", "sql12818968", "gPJyvRMYEA");
     }
 
     public static DBConnection getInstance() throws SQLException {

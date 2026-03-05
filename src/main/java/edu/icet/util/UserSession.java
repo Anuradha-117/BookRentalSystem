@@ -1,4 +1,4 @@
-package util;
+package edu.icet.util;
 
 public class UserSession {
     public static String userRole = "";

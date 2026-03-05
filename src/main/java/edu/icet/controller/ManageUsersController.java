@@ -1,16 +1,17 @@
-package controller;
+package edu.icet.controller;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import db.DBConnection;
+import edu.icet.db.DBConnection;
+import edu.icet.util.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import model.User;
+import edu.icet.model.User;
 
 import java.sql.*;
 
@@ -67,7 +68,7 @@ public class ManageUsersController {
             return;
         }
 
-        if ("Admin".equalsIgnoreCase(role) && !util.UserSession.username.equalsIgnoreCase("admin")) {
+        if ("Admin".equalsIgnoreCase(role) && !UserSession.username.equalsIgnoreCase("admin")) {
             new Alert(Alert.AlertType.ERROR, "Only the Main Admin can create new Admins!").show();
             return;
         }
@@ -106,7 +107,7 @@ public class ManageUsersController {
             return;
         }
 
-        if (selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+        if (selectedUser.getUsername().equalsIgnoreCase(UserSession.username)) {
             if (!cmbRole.getValue().equalsIgnoreCase(selectedUser.getRole())) {
                 new Alert(Alert.AlertType.ERROR, "You cannot change your own role!").show();
                 return;
@@ -114,17 +115,17 @@ public class ManageUsersController {
         }
 
         String newRole = cmbRole.getValue();
-        if (!util.UserSession.username.equalsIgnoreCase("admin")
+        if (!UserSession.username.equalsIgnoreCase("admin")
                 && selectedUser.getRole().equalsIgnoreCase("Admin")) {
 
-            if (!selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+            if (!selectedUser.getUsername().equalsIgnoreCase(UserSession.username)) {
                 new Alert(Alert.AlertType.ERROR, "Only the Main Admin can update other Admins!").show();
                 return;
             }
         }
 
-        if ("Admin".equalsIgnoreCase(newRole) && !util.UserSession.username.equalsIgnoreCase("admin")) {
-            if (!selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+        if ("Admin".equalsIgnoreCase(newRole) && !UserSession.username.equalsIgnoreCase("admin")) {
+            if (!selectedUser.getUsername().equalsIgnoreCase(UserSession.username)) {
                 new Alert(Alert.AlertType.ERROR, "Only the Main Admin can assign the Admin role!").show();
                 return;
             }
@@ -168,18 +169,18 @@ public class ManageUsersController {
         }
 
         if (selectedUser.getUsername().equalsIgnoreCase("admin")) {
-            new Alert(Alert.AlertType.ERROR, "The Main Admin account cannot be deleted!").show();
+            new Alert(Alert.AlertType.ERROR, "The edu.icet.controller.Main Admin account cannot be deleted!").show();
             return;
         }
 
-        if (!util.UserSession.username.equalsIgnoreCase("admin")
+        if (!UserSession.username.equalsIgnoreCase("admin")
                 && selectedUser.getRole().equalsIgnoreCase("admin")) {
-            new Alert(Alert.AlertType.ERROR, "Only the Main Admin can delete other Admins!").show();
+            new Alert(Alert.AlertType.ERROR, "Only the edu.icet.controller.Main Admin can delete other Admins!").show();
             return;
         }
 
 
-        if (selectedUser.getUsername().equalsIgnoreCase(util.UserSession.username)) {
+        if (selectedUser.getUsername().equalsIgnoreCase(UserSession.username)) {
             new Alert(Alert.AlertType.ERROR, "You cannot delete your own account while logged in!").show();
             return;
         }
