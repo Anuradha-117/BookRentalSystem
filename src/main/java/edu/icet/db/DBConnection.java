@@ -1,5 +1,6 @@
 package edu.icet.db;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +15,7 @@ public class DBConnection {
     private DBConnection() throws SQLException {
         Properties props = new Properties();
 
-        try (InputStream input = getClass().getClassLoader().getResourceAsStream("database.properties")) {
+        try (InputStream input = new FileInputStream("database.properties")) {
             if (input == null) {
                 throw new SQLException("Unable to find database.properties file.");
             }
