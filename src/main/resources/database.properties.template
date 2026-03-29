@@ -1,0 +1,8 @@
+# Change the port (3306) if your MySQL has a  different port
+db.url=jdbc:mysql://localhost:3306/
+
+# Change 'root' if you use a different local database username
+db.username=root
+
+# Enter your local MySQL password.
+db.password=Enter your MySQL password here

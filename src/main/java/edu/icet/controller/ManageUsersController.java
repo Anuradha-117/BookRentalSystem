@@ -169,13 +169,13 @@ public class ManageUsersController {
         }
 
         if (selectedUser.getUsername().equalsIgnoreCase("admin")) {
-            new Alert(Alert.AlertType.ERROR, "The edu.icet.controller.Main Admin account cannot be deleted!").show();
+            new Alert(Alert.AlertType.ERROR, "The Main Admin account cannot be deleted!").show();
             return;
         }
 
         if (!UserSession.username.equalsIgnoreCase("admin")
                 && selectedUser.getRole().equalsIgnoreCase("admin")) {
-            new Alert(Alert.AlertType.ERROR, "Only the edu.icet.controller.Main Admin can delete other Admins!").show();
+            new Alert(Alert.AlertType.ERROR, "Only the Main Admin can delete other Admins!").show();
             return;
         }
 
