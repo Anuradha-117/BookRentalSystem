@@ -18,15 +18,6 @@ import java.time.temporal.ChronoUnit;
 public class RentalsController {
 
     @FXML
-    private JFXButton btnIssue;
-
-    @FXML
-    private JFXButton btnReturn;
-
-    @FXML
-    private JFXButton btnDelete;
-
-    @FXML
     private TableColumn<Rental, Integer> colBookId;
 
     @FXML
